@@ -36,7 +36,7 @@ def isReturnFile(myfile):
 	if os.path.abspath(os.path.expanduser(myfile.strip())) != False:
 		return os.path.abspath(os.path.expanduser(myfile.strip()))
 	else:
-		print 'You can\'t save to that location'
+		print('You can\'t save to that location')
 		sys.exit()
 
 
@@ -44,12 +44,12 @@ def SaveFile(transaction,myfile):
 	mf = isReturnFile(myfile)
 	if os.path.isfile(mf):
 		fout = codecs.open(mf, "a", "utf-8")
-		fout.write(unicode(myNewLine(), "utf-8"))
+		fout.write(str(myNewLine(), "utf-8"))
 	else:
 		fout = codecs.open(mf, "w", "utf-8")
-	fout.write(unicode(transaction,"utf-8"))
+	fout.write(str(transaction,"utf-8"))
 	fout.close()
-	print 'Saved File!'
+	print('Saved File!')
 
 
 def TestDateRanage(ptype,periods,activedate):
@@ -63,7 +63,7 @@ def TestDateRanage(ptype,periods,activedate):
 		testdate = activedate+relativedatem
 		return True;
 	except Exception as inst:
-		print "Sorry, that date is out of range"
+		print("Sorry, that date is out of range")
 		sys.exit()
 		return False;
 
@@ -72,7 +72,7 @@ def GetTransactions(method,cost,residual,asset,expense,payment,periods,dt,note,p
 	transactions = ""
 	transactionobj = Depreciation.DepreciationSchedule(method,periods,cost,residual)
 	if transactionobj == False:
-		print "Sorry, something about those numbers doesn't make sense!"
+		print("Sorry, something about those numbers doesn't make sense!")
 		sys.exit()
 	else:
 		transactionlist = transactionobj.Schedule()
@@ -134,14 +134,14 @@ def main():
 	if len(options.asset.strip())>0 and len(options.expense.strip())>0 and len(options.payment.strip())>0 and options.cost>0:
 		transactions = GetTransactions(options.method.strip(),options.cost,options.residual,options.asset.strip(),options.expense.strip(),options.payment.strip(),options.periods,options.date.strip(),options.note.strip(),options.ptype.strip())
 	else:
-		print "You have to specify at least a cost of the asset"
+		print("You have to specify at least a cost of the asset")
 		sys.exit()
 	
 	if len(options.savefile.strip())>0:
 		SaveFile(transactions,options.savefile.strip())
 		sys.exit()
 	else:
-		print unicode(transactions,"utf-8")
+		print(transactions)
 		sys.exit()
 
 
