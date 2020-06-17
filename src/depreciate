@@ -97,7 +97,8 @@ def GetTransactions(method,cost,residual,asset,expense,payment,periods,dt,note,p
 		activedate=activedate+relativedate
 		startline = activedate.strftime('%Y/%m/%d').strip() + " * " + note.strip()
 		debitline = "\t" + expense.strip() + "\t\t" + currencyvar.strip() + str(s)
-		creditline = "\t" + asset.strip() + ":Accumulated Depreciation"
+		# I dont want the suffix to my accounts
+		creditline = "\t" + asset.strip() #+ ":Accumulated Depreciation"
 		transactions = transactions + myNewLine() + startline + myNewLine() + debitline + myNewLine() + creditline
 	return transactions
 		
